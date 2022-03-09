@@ -157,16 +157,10 @@ class Blockchain {
      */
     getBlockByHash(hash) {
         let self = this;
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, _reject) => {
             const chain = self.chain;
-            const found = chain.filter(block => block.hash === hash);
-            if (found.length <= 1) {
-                const block = found.length === 0 ? undefined : found[0];
-                resolve(block);
-            } else {
-                const error = new Error('More than one block found!');
-                reject(error);
-            }
+            const block = chain.find(block => block.hash === hash);
+            resolve(block);
         });
     }
 
@@ -177,15 +171,10 @@ class Blockchain {
      */
     getBlockByHeight(height) {
         let self = this;
-        return new Promise((resolve, reject) => {
-            const found = self.chain.filter(block => block.height === height);
-            if (found.length <= 1) {
-                const block = found.length === 0 ? undefined : found[0];
-                resolve(block);
-            } else {
-                const error = new Error('More than one block found!');
-                reject(error);
-            }
+        return new Promise((resolve, _reject) => {
+            const chain = self.chain;
+            const block = chain.find(block => block.height === height);
+            resolve(block);
         });
     }
 

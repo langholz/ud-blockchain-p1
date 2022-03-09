@@ -40,8 +40,7 @@ class Block {
         return new Promise((resolve, _reject) => {
             // Save in auxiliary variable the current block hash
             const currentHash = self.hash;
-            const blockCopy = JSON.parse(JSON.stringify(self));
-            blockCopy.hash = null;
+            const blockCopy = { ...self, hash: null };
             // Recalculate the hash of the Block
             const recalculatedHash = SHA256(JSON.stringify(blockCopy)).toString();
             // Comparing if the hashes changed
